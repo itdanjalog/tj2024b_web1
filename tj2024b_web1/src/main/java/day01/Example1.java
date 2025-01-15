@@ -13,6 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Example1 extends HttpServlet  {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("안녕 나는 서블릿이야.");
+		System.out.println("안녕 나는 서블릿이야1.");
 	}
 }
