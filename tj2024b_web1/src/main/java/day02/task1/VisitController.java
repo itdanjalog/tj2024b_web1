@@ -30,7 +30,6 @@ public class VisitController extends HttpServlet { // [1] HttpServlet 상속받�
 	// 2. 방문록 조회 					: Read [ R ]		doGet 
 	// 3. 방문록 수정 					: Update [ U ]		doPut 
 	// 4. 방문록 삭제 ( 쿼리스트링 ) 		: Delete [ D ]		doDelete 
-	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 1. URL 상의 쿼리스트링 매개변수를 가져온다. 삭제할번호PK
