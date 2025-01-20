@@ -47,7 +47,17 @@ public class VisitController extends HttpServlet {
 	// 3. 방문록 수정 		: PUT 		, url : http://localhost:8080/tj2024b_web1/day03/visit2	
 	// 매개변수 : BODY 				, 매개변수 예] { "num" : 3 , "content":"수정안녕" , "age" : 40 }
 	// 반환타입 : application/json		, 매개변수 예] true
-	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 1. HTTP로 부터 요청(request) 받은 HTTP HEADER BODY(본문) 를 DTO 파싱(변환) 가져오기.
+		ObjectMapper mapper = new ObjectMapper();
+		VisitDto visitDto = mapper.readValue( req.getReader() , VisitDto.class );
+		// 2. DAO 처리
+		boolean result = VisitDao.getInstance().update( visitDto );
+		// 3. DAO 결과를 HTTP HEADER BODY(본문)으로 응답(response) 보내기 
+		resp.setContentType("application/json");
+		resp.getWriter().print(result);
+	} // f end 
 	
 	// 4. 방문록 삭제 		: DELETE 	, url : http://localhost:8080/tj2024b_web1/day03/visit2?num=1
 	// 매개변수 : queryString 			, 매개변수 예 ] ?num=1
@@ -61,7 +71,7 @@ public class VisitController extends HttpServlet {
 		// 3. DAO 결과를 HTTP HEADER BODY(본문)으로 응답(response) 보내기
 		resp.setContentType("application/json");
 		resp.getWriter().print( result );
-	}
+	} // f end 
 	
 } // f end 
 

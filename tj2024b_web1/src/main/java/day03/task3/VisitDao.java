@@ -54,6 +54,23 @@ public class VisitDao {
 		return list;
 	} // f end 
 	
+	// 3. 방문록 수정 SQL
+	public boolean update( VisitDto visitDto ) {
+		try {
+			String sql = "update visit "
+					+ " set content = ? , age = ? "
+					+ " where num = ? ";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString( 1 , visitDto.getContent() );
+			ps.setInt( 2 , visitDto.getAge() );
+			ps.setInt( 3 , visitDto.getNum() );
+			int count = ps.executeUpdate();
+			if( count == 1 ) { return true; }
+		}catch( SQLException e ) { System.out.println(e);}
+		return false;
+	} // f end 
+	
+	
 	// 4. 방문록 삭제 SQL 
 	public boolean delete( int num ) {
 		try {
