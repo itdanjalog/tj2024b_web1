@@ -5,6 +5,7 @@
 		1. 무상태 프로로콜 ( 상태 없고 -> 저장기능 없다 )
 		2. 독립적 , 이전 요청 과 다음 요청은 다르다
 		3. TCP/IP 프로토콜의 종속되어 동작 PORT 80/8080 사용한다.
+			http://ip:port
 	3. 주소 체계
 		URL : 웹 주소 , 네트워크 상의 자료가 어디에 있는지 위치를 표시하는 규약   
 			http://ip:port/자료위치
@@ -15,9 +16,10 @@
 			(URL) https://finance.naver.com/item/main.naver
 			(URI) https://finance.naver.com/item/main.naver?code=005930
 			
-	4. HTTP Header ( HTTP 통신 정보 )
+	4. HTTP Header ( HTTP 통신 정보/내용가 들어있는 곳  )
 		[ 주요 ]
 		1. HTTP ***METHOD*** : HTTP 이용한 통신 요청할 때 분류 하는 규칙 
+			* 과거에는 GET 방식으로 만 통신 했지만 현재는 다양한 방식을 제공한다.
 		2. HTTP ***BODY*** : HTTP 이용하여 데이터의 내용/본문 보낼때 사용되는 규칙
 		3. HTTP Content-Type : HTTP 이용한 데이터의 타입 정보 
 		4. HTTP HOST : HTTP 이용한 통신 요청하는 서버의 URL 주소 
@@ -37,10 +39,13 @@
 			3. [ 확장 프로그앰에 추가 ] 클릭 
 			[사용]
 			크롬 주소 입력창 오른쪽 끝에 *확장프로그램[아이콘] 클릭 
+		3. ( JS ) fetch, ajax(JQUERY) , axios(REACT) 등등 : JS가 제공하는 HTTP 통신 라이브러리 
 			
 	6. HTTP 가 데이터를 보내는 방법
+		* 우체국에 편지(통신) 보낸다. 편지봉투( 보낸사람,받는사람 = url / queryString ), 편지지( 내용물 = body ) 
 		방법1. 쿼리스트링
 			1. 정의 : url 주소상의 '?'물음표 구분하여 매개변수명 = 값 표시하고 여러개 일경우 '&'(엔퍼센트) 구분한다.
+			2. 요청 : GET , POST , PUT , DELETE 메소드 에서 사용 가능. ( 보안상 좋지 않다. )
 				예1]
 				https://finance.naver.com/item/main.naver?code=005930
 				(URL) https://finance.naver.com/item/main.naver
@@ -48,14 +53,20 @@
 					매개변수명은 code 
 					매개변수값은 005930
 				예2]
-				https://www.leelin.co.kr/shop/shopdetail.html?branduid=1168891&search=&xcode=028
+				https://www.leelin.co.kr/shop/shopdetail.html?branduid=1168891&xcode=028
 				(URL)https://www.leelin.co.kr/shop/shopdetail.html
 				(쿼리스트링) 
 					매개변수명 : branduid ,	xcode
 					매개변수값 : 1168891  ,	028
 			
 		방법2. HTTP header(정보) body
-			
+			1. 정의 : HTTP 요청 과 응답 내용 자체를 전달하는 역할 
+			2. 요청 : POST,PUT 메소드 지원/권장, ( 보안상 좋다. )
+				1. content-type 
+			3. 응답 : 
+				1. HTTP 상태 메시지( 2XX:성공 , 4XX:프로토콜문제 , 5XX:서버문제 )
+			 	2. content-type
+			 	
 			
 			
 			
