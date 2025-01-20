@@ -1,6 +1,7 @@
 package day03.task3;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,7 +31,18 @@ public class VisitController extends HttpServlet {
 	// 2. 방문록 전체조회 	: GET		, url : http://localhost:8080/tj2024b_web1/day03/visit2	
 	// 매개변수 : X
 	// 반환타입 : application/json		, 매개변수 예] [ { "num" : 1 , "content":"안녕1" , "age" : 30 } , { "num" : 2 , "content":"안녕2" , "age" : 20 }  ]
-	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 1. X 
+		// 2. DAO처리 
+		ArrayList< VisitDto > result = VisitDao.getInstance().findAll();
+		// 3. DAO 결과를 HTTP HEADER BODY(본문)으로 응답(response) 보내기
+			// 자바객체(DTO) --> JSON 형식의 문자열 타입변환 
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonResult = mapper.writeValueAsString( result );
+		resp.setContentType("application/json");
+		resp.getWriter().print( jsonResult );
+	} // f end 
 	
 	// 3. 방문록 수정 		: PUT 		, url : http://localhost:8080/tj2024b_web1/day03/visit2	
 	// 매개변수 : BODY 				, 매개변수 예] { "num" : 3 , "content":"수정안녕" , "age" : 40 }

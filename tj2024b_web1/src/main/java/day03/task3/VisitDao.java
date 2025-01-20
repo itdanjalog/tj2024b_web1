@@ -3,7 +3,9 @@ package day03.task3;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class VisitDao {
 	private Connection conn;
@@ -32,6 +34,24 @@ public class VisitDao {
 		}catch( SQLException e ) { System.out.println(e);}
 		
 		return false;
+	} // f end 
+	
+	// 2. 방문록 전체 조회 SQL 
+	public ArrayList<VisitDto> findAll(){
+		ArrayList<VisitDto> list = new ArrayList<VisitDto>();
+		try {
+			String sql = "select * from visit";
+			PreparedStatement ps = conn.prepareStatement(sql );
+			ResultSet rs = ps.executeQuery();
+			while( rs.next() ) {
+				VisitDto visitDto = new VisitDto();
+				visitDto.setNum( rs.getInt("num") );
+				visitDto.setContent( rs.getString("content"));
+				visitDto.setAge( rs.getInt("age") );
+				list.add(visitDto);
+			}
+		}catch( SQLException e) { System.out.println(e);}
+		return list;
 	} // f end 
 	
 	// 4. 방문록 삭제 SQL 
