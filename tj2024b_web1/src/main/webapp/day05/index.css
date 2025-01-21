@@ -1,0 +1,13 @@
+#header > ul{
+	display: flex;
+}
+#header > ul > li {
+	margin-right: 20px;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+li{
+	list-style-type: none;
+}
