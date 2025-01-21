@@ -37,7 +37,7 @@ const visitFindAll = ( ) => {
 	// 2-1 fetch 이용한 서블릿에게 자료를 HTTP GET METHOD 요청 
 	const option = { method : 'GET' }
 	// 2-2 fetch 
-	fetch( '/tj2024b_web1/day03/visit2' )
+	fetch( '/tj2024b_web1/day03/visit2' , option )
 		.then( r => r.json() ) // 통신 응답 성공시 json타입으로 변환
 		.then( data => { 
 			// 방법1 : for( let index = 0 ; index <= data.length -1 ; index++ ){ }
@@ -47,7 +47,10 @@ const visitFindAll = ( ) => {
 							<td> ${ obj.num } </td>
 							<td> ${ obj.content }</td>
 							<td> ${ obj.age }</td>
-							<td> </td>
+							<td>
+								<button onclick=" visitUpdate( ${ obj.num } )" > 수정 </button>
+								<button onclick=" visitDelete( ${ obj.num } )" > 삭제 </button>
+							</td>
 						</tr>`
 			}) // for end 
 			// 3. 출력  // .innerHTML : 지정한 마크업의 html문자열 속성 
@@ -57,9 +60,43 @@ const visitFindAll = ( ) => {
 } // f end 
 visitFindAll(); //  1.JS열릴때
 
-// 3. 수정 함수 
+// 3. 수정 함수 , 누구를 수정할껀지 = num[pk]
+const visitUpdate = ( num ) => {  // prompt()함수로 수정할 content/age 받기 
+	// 1. 수정할 식별자(num)
+	// 2. 수정할 내용 content/age
+	let newContent = prompt('new Content : ');	// prompt() 알람창에서 입력input 지원하는 함수.
+	let newAge = prompt('new Age : ');
+	// 3. 객체화 , { 수정할번호 , 수정할내용 , 수정할나이 } 
+	let dataObj = { num : num , content : newContent , age : newAge } 
+	// 4. fetch 이용한 서블릿에게 HTTP PUT METHODE 처리 요청 , BODY
+	const option = {
+		method : 'PUT' , 
+		headers : { 'Content-Type' : 'application/json' } ,
+		body : JSON.stringify( dataObj )
+	} // o end 
+	fetch( `/tj2024b_web1/day03/visit2` , option )
+		.then( r => r.json() )
+		.then( data => {
+			if( data == true ){ alert('수정성공'); visitFindAll(); }
+			else{ alert('수정실패'); }
+		})
+		.catch( e => { console.log(e); })
+} // f end 
 
-// 4. 삭제 함수 
+// 4. 삭제 함수 , 누구를 삭제할껀지 = num[pk]
+const visitDelete = ( num ) => {
+	// 1. 삭제할 식별자(num) 
+	// 2. fetch 이용한 서블릿에게 HTTP delete METHOD 처리 요청 , queryString 이용하여 삭제할 번호 보내기.
+	const option = { method : 'DELETE' }
+	fetch( `/tj2024b_web1/day03/visit2?num=${ num }` , option )
+		.then( r => r.json() ) // 응답 결과를 json타입으로 변환 
+		.then( data => {
+			if( data == true ){ alert('삭제성공'); visitFindAll();} // 만약에 응답이 true 이면 alert안내후 출력함수호출
+			else{ alert('삭제실패'); }
+		}) 
+		.catch( e => { console.log( e ); } )
+} // f end
+
 
 
 
