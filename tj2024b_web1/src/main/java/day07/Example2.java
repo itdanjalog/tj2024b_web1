@@ -1,7 +1,9 @@
 package day07;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 // 서블릿 X
 public class Example2 {
@@ -54,20 +56,26 @@ public class Example2 {
 		System.out.println( list.isEmpty() ); // false
 		
 			// (10) 리스트내 요소들을 순회(하나씩꺼내기) 하는 방법 
-		// 1. 일반 for문  
-		for( int index = 0 ; index <= list.size()-1 ; index++ ) {
-			System.out.print( list.get(index) );
-		}
-		// 2. 향상된 for문 , for( 타입 반복변수명 : 리스트명 ) { } 
-		for( String str : list ) {
-			System.out.print( str );  
-		}
-		// 3. forEach( (반복변수명) -> { 실행문 } ) , JS : ()=>{ } , JAVA : ( ) -> { } 
-		list.forEach( (str) -> { System.out.print(str); } );
-		
-		
-		
-		
+				// 1. 일반 for문  
+				for( int index = 0 ; index <= list.size()-1 ; index++ ) {
+					System.out.print( list.get(index) );
+				}
+				// 2. 향상된 for문 , for( 타입 반복변수명 : 리스트명 ) { } 
+				for( String str : list ) {
+					System.out.print( str );  
+				}
+				// 3. forEach( (반복변수명) -> { 실행문 } ) , JS : ()=>{ } , JAVA : ( ) -> { } 
+				list.forEach( (str) -> { System.out.print(str); } );
+				
+		// 3. 클래스 들 
+			// 3가지 주요 클래스들은 사용법(메소드) 동일하다.
+		ArrayList< String > list1 = new ArrayList<String>();
+		Vector< String > list2 = new Vector<String>();			// + 멀티스레드 에서 주로 사용됨.
+		LinkedList< String > list3 = new LinkedList<String>();	// + 요소가 중간 삽입/삭제 용이하다.
+			// 여러 클래스들의 인스턴스를 다루기 위해서는 주로 인터페이스 타입 사용한다.
+		List< String > list4 = new ArrayList<String>();
+		List< String > list5 = new Vector<String>();
+		List< String > list6 = new LinkedList<String>();
 		
 	} // main end 
 } // class end 
