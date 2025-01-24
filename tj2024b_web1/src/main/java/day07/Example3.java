@@ -3,6 +3,7 @@ package day07;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Example3 {
 	public static void main(String[] args) {
@@ -34,6 +35,13 @@ public class Example3 {
 		set.add("유재석"); System.out.println( set ); // [유재석, 신동엽]
 		set.add("유재석"); System.out.println( set ); // [유재석, 신동엽]
 
+		// [3] TreeSet 인스턴스 생성 , 정렬 기능 포함 
+		TreeSet <String> set2 = new TreeSet<String>();
+		set2.add("유재석"); 	
+		set2.add("강호동");	
+		set2.add("서장훈");
+		System.out.println( set2 ); // 자동으로 오름차순 정렬 : [강호동, 서장훈, 유재석]
+		System.out.println( set2.descendingSet() ); // 내림차순 정렬 : [유재석, 서장훈, 강호동]
 		
 	} // m end 
 } // c end 
