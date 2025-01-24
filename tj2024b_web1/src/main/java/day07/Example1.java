@@ -36,11 +36,11 @@ public class Example1 {
 			// * 게시물 1개 조회 : Dto , * 게시물 여러개 조회 : ArrayList<Dto>
 
 		// [5] 제네릭타입 여러개 
-		Point< String , Integer > point = new Point();
+		Point< String , Integer > point = new Point<>();
 		point.value1 = "안녕하세요";	// 제네릭타입에 String 타입을 대입했으므로 가능.
 		point.value2 = 100;			// 제네릭타입에 Integer 타입을 대입했으므로 가능.
 		
-		Point< Double , Dto > point2 = new Point();
+		Point< Double , Dto > point2 = new Point<>();
 		point2.value1 = 100.0;		// 제네릭타입에 Double 타입을 대입했으므로 가능.
 		point2.value2 = new Dto();	// 제네릭타입에 Dto 타입을 대입했으므로 가능.
 		
