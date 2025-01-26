@@ -1,0 +1,50 @@
+롬복 설치법
+https://sharonprogress.tistory.com/159
+롬복 적용안될떄
+https://daftcoder.tistory.com/entry/%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-eclipse-%EC%97%90%EC%84%9C-%EB%A1%AC%EB%B3%B5-lombok-%EC%A0%81%EC%9A%A9-%EC%95%88%EB%90%A0-%EB%95%8C-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95
+
+// 아래 경로 또는 아이콘 오른쪽 클릭해서 이클립스 설치 경로 보기.
+ help->about eclipse -> installation detail -> configuration 탭 -> system property
+ 
+ 
+ [ 롬복 ]
+    1. 정의 : 반복되는 코드들을 줄여주는 라이브러리( 미리 만들어진 함수/코드들 )
+    2. 내 프로젝트의 롬복 적용/설치 하는 방법
+        1. 롬복 관련 build.gradle 에 의존성 추가한다. ( 프로젝트 마다 )
+            *[ 의존성 검색/추가 : 3.그레이들 메모장 참고 ]
+          compileOnly 'org.projectlombok:lombok'
+          annotationProcessor 'org.projectlombok:lombok'
+
+        2. 인텔리제이 롬복 설치 ( 인털리제이[PC] 마다 1번 )
+            1. 상단 메뉴 -> [FILE] -> [Settings]
+            2. 사이드메뉴 [ Plugins ] 클릭 -> lombok 검색 -> install
+
+    3. 제공 : @어노테이션 이용
+        1. 생성자를 대신 만들어준다.
+            @NoArgsConstructor      : 디폴트 생성자
+            @AllArgsConstructor     : 모든매개변수 생성자
+        2. getter and setter 메소드 대신 만들어준다
+            @Getter                 : 멤버변수의 getter 메소드
+            @Setter                 : 멤버변수의 setter 메소드
+        3. toString 메소드 대신 만들어준다.
+            @toString               : toString 메소드
+        4. 빌더 패턴 지원한다.
+            @Builder                : **
+
+    4. 빌더 패턴 : 인스턴스(객체) 만드는 패턴
+        1. 정의 : 생성자의 단점을 보완 * new 키워드 없이 인스턴스 만들기
+        2. 사용법 : 전제조건은 해당 클래스가 @Builder 이면 가능하다.
+            클래스명.builder()
+                .멤버변수명1( 대입할값 )
+                .멤버변수명2( 대입할값 )
+                .멤버변수명3( 대입할값 )
+                .build();
+
+        3. 목적 : 인스턴스 생성시 초기화를 조금더 유연하게 하기 위해서 생성자 대신 빌더 패턴
+
+* 생성자란?
+- new 키워드 뒤에 사용하면서 인스턴스(객체)를 생성할때 멤버변수 초기화하는 메소드
+- 단점 이자 생성자 사용의 규칙 :
+    1. 상황에 따라 초기화가 다르면 여러 생성자가 필요하다. [ 오버로딩 ]
+    2. 생성자 관리 힘들다.
+    3. 매개변수 순서 와 개수 를 인수값과 일치해야 한다.

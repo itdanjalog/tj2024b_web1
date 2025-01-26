@@ -33,6 +33,9 @@
 					TOMCAT ADMIN PORT : 아무거나(8081 권장)
 					HTTP : 8080(기본값)
 					* 변경 사항이 있으면 ctrl+s(저장) 하고 종료한다.
+	
+	5. https://computer-science-student.tistory.com/474
+	
 
 * 프로젝트 구조도 
 	1. 프로젝트명 
