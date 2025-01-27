@@ -21,15 +21,20 @@
 					- C:\Users\{pc이름}\eclipse\{이클립스버전}\eclipse	
 				2. [ install/update ] 클릭 
 			4. 'install successful' 확인 -> [ quit installer ] 클릭 
+		4. getter / setter 메소드가 적용이 안될때 
+			1. 프로젝트명 오른쪽 클릭 -> [ properties ] 
+			2. 검색란 'ann' 입력 -> 사이드바 메뉴 [ annotaion processing ] 클릭 -> [Enable project specific settings ] 체크 -> [apply colose ]
+			
+			
 	4. @ 롬복 주요 어노테이션 
 		1. @NoArgsConstructor				: 	디폴트 생성자 코드 생성 
 			- @NoArgsConstructor( access = lombok.AccessLevel.PRIVATE ); 	:  private 디폴트 생성자를 생성
-		2. @AllArgsConstructor				:	모든 매개변수 생성자 코드 생성  
-		3. @Getter							:	멤버변수의 getter 메소드 코드 생성 
+		2. @AllArgsConstructor				: 모든 매개변수 생성자 코드 생성  
+		3. @Getter							: 멤버변수의 getter 메소드 코드 생성 
 			-  @Getter	class 클래스명{}		: 클래스내 모든 멤버변수의 getter 메소드 생성 
 			-  @Getter	int 변수명;			: 클래스내 특정 멤버변수의 getter 메소드 생성 
-		4. @Setter							: 	멤버변수의 setter 메소드 코드 생성 
-		5. @ToString						:	멤버변수의 toString 메소드 코드 생성 
+		4. @Setter							: 멤버변수의 setter 메소드 코드 생성 
+		5. @ToString						: 멤버변수의 toString 메소드 코드 생성 
 	
 	5. 코드 자동 생성 : 프로젝트가 컴파일(실행) 될때 지정한 어노테이션에 따라 코드가 자동으로 생성된다.
 	
@@ -56,5 +61,9 @@
 			각 라이브러리 회사마다 너~~~~~~~~~무 다양하다.
 			1. 롬복 어노테이션 
 			2. 스프링 어노테이션 *
+			
+			
+			
+			
 			
 			
