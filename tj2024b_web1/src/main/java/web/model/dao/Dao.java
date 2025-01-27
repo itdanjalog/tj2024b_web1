@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Dao {
-	
 	protected Connection conn;		// DB와 연동 결과를 조작하는 인터페이스 
 	
 	private String dburl = "jdbc:mysql://localhost:3306/jspweb"; // 연동할 DB 서버의 URL
@@ -21,4 +20,4 @@ public class Dao {
 			System.out.println("[DB 연동 실패]" + e );
 		}
 	} 
-} // class end 
+}
