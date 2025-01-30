@@ -27,9 +27,17 @@ const getLoginMid = ( ) =>{
             }else{ // 응답 결과가 비어 있지 않으면 
                 console.log( '로그인상태');
                 //3. 로그아웃 버튼 , 마이페이지 버튼 , 로그인된 아이디 활성화 
-                html +=`<li class="nav-item">  <a class="nav-link" href="#"> ${ data.mid }님</a> </li>
-                        <li class="nav-item">  <a class="nav-link" href="#" onclick="logOut()"> 로그아웃 </a> </li>
-                        <li class="nav-item">  <a class="nav-link" href="/member/info.jsp"> 마이페이지 </a> </li>`
+                html +=`<li class="nav-item dropdown">
+						    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						        <img style="width:50px; border-radius:30px;border: 1px solid;padding: 2px;" src="/upload/${ data.mimg }"/> ${ data.mid }님</a>
+						    </a>
+						    <ul class="dropdown-menu">
+						        <li class="nav-item">  <a class="nav-link" href="#" onclick="logOut()"> 로그아웃 </a> </li>
+						        <li><hr class="dropdown-divider"></li>
+						        <li class="nav-item">  <a class="nav-link" href="/member/info.jsp"> 마이페이지 </a> </li>
+						    </ul>
+						</li>
+						`
             }
             // 4. 출력하기 
             memberBox.innerHTML = html;
@@ -41,7 +49,7 @@ getLoginMid(); // JS 실행될때. 로그인 정보 요청 함수 호출
 // [2] 로그아웃 함수
 const logOut = ( ) => {
     // 1. fetch option
-    const option = { method : 'GET' }
+    const option = { method : 'DELETE' }
     // 2. fetch
     fetch( '/member/login' , option )
         .then( response => response.json() )

@@ -16,9 +16,9 @@
     <div >
         <!-- 네이게이션 바 코드 붙여넣기 -->
         <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
+            <div class="container">
                 <!-- [1] 헤더의 로고에 img 마크업 추가 하고 링크 "/" index페이지로 이동. -->
-                <a class="navbar-brand" href="/index.jsp"> <img src="/img/logo.png" /> </a>
+                <a class="navbar-brand" href="/index.jsp"> <img src="/img/logo.png" style="width: 60px;"/> </a>
                 <!-- [2] 반응형 (콜렙스)버튼 : 특정한 브라우저(디바이스)가 작아질때 나타는 버튼 -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,6 +30,7 @@
                         <!-- [4] 메뉴1개 -->
                         <li class="nav-item">  <a class="nav-link active" href="/index.jsp"> WebShop </a>  </li>
                         <li class="nav-item">    <a class="nav-link" href="#"> 게시판 </a>    </li>
+                        <li class="nav-item">    <a class="nav-link" href="/api/data.jsp"> 공공데이터 </a>    </li>
                         <!-- [5] 드랍메뉴 -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

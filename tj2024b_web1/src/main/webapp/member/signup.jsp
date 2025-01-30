@@ -3,11 +3,14 @@
     
     
 <jsp:include page = "/header.jsp" />
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 </head>
 <body>
+
+  <div th:replace="~{ /header.html :: header }"></div>
 
   <!-- 부트스트랩의 로그인 예시 붙여넣기 -->
   <div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -20,15 +23,15 @@
 
       <!-- 오른쪽 구역 -->
       <div class="col-md-10 mx-auto col-lg-5">
-        <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+        <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary memberSingUpForm">
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control midInput" id="floatingInput" placeholder="ID">
+            <input type="text" name="mid" class="mid form-control midInput " id="floatingInput" placeholder="ID">
             <label for="floatingInput">계정아이디</label>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="password" class="form-control mpwdInput" id="floatingPassword" placeholder="Password">
+            <input type="password" name="mpwd"  class="mpwd form-control mpwdInput " id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">계정비밀번호</label>
           </div>
 
@@ -38,13 +41,17 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control mnameInput" id="floatingInput" placeholder="Name">
+            <input type="text" name="mname"  class="mname form-control mnameInput " id="floatingInput" placeholder="Name">
             <label for="floatingInput">닉네임</label>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control mphoneInput" id="floatingInput" placeholder="Phone">
-            <label for="floatingInput">연락처</label>
+            <input type="text" name="memail"  class="memail form-control memailInput " id="floatingInput" placeholder="Email">
+            <label for="floatingInput">이메일</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="file" name="uploadfiles" class="uploadfiles form-control " id="floatingInput" placeholder="file">
+            <label for="floatingInput">프로필사진</label>
           </div>
 
           <button class="w-100 btn btn-lg btn-primary" type="button" onclick="onSignUp()"> 회원가입 </button>
@@ -59,6 +66,11 @@
 
 </body>
 </html>
+
+
+
+
+
 
 
 
