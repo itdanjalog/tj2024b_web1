@@ -38,11 +38,37 @@ public class Example3 extends HttpServlet {
 		// (5) 출력할 내용물 , list 타입을 (JSON형식)문자열타입으로 변환 
 		String outStr = mapper.writeValueAsString(list);
 		// (6) 출력할 내용물을 바이트로 변환 
-		byte[] bytes = outStr.getBytes();
+		byte[] bytes = outStr.getBytes(); 
 		// (7) 바이트 출력/내보내기 
 		out.write( bytes );
+		
+		resp.setContentType("text/plain");
+		resp.getWriter().print("파일 저장 성공");
 	} // f end 
 	
+	// 2. 파일 내용 가져오기
+	@Override // http://localhost:8080/tj2024b_web1/day09/example3
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// 1. 지정한 파일경로의 파일객체로 가져오기 
+		File file = new File(filePath + "/test3.txt");
+		if( !file.exists() ) { // 2. 만일 파일이 존재하지 않으면 
+			System.out.println("파일이 존재하지 않습니다.");
+			resp.setContentType("text/plain");
+			resp.getWriter().print( "파일이 존재하지 않습니다." );
+		}else {
+			// 3. 파일의 자료들을 arraylist 타입으로 변환
+			ObjectMapper mapper = new ObjectMapper();
+				// mapper.readValue( req.getReader() 혹은 file , 
+			ArrayList< HashMap<String, String >> list 
+				= mapper.readValue( file , ArrayList.class );
+			// 4. 읽어온 파일의 list 내용들을 다시 json 문자열로 변환 
+			String jsonResult =  mapper.writeValueAsString( list );
+			// 5. 파일의 내용들을 HTTP 응답 하기.
+			resp.setContentType("application/json");
+			resp.getWriter().print( jsonResult );
+		}
+	} // f end 
 } // class end 
 
 

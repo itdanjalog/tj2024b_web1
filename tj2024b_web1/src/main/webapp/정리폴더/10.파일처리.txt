@@ -42,8 +42,52 @@
 		6. .getPath()	: 지정된 파일의 경로 반환 메소드 
 		7. .mkdir()		: 지정된 경로 폴더 생성 메소드 
 		
+[ 서블릿 파일 클래스 ]
+	1. [ 업로드 라이브러리 종류 ]
+		cos.jar , commons(*)
+	2. commons 라이브러리 준비 
+		1. https://mvnrepository.com : 라이브러리 모음 홈페이지 
+		2. 'commons fileupload' 검색	
+			- Apache Commons FileUpload
+				https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload/1.5
+			- Apache Commons IO
+				https://mvnrepository.com/artifact/commons-io/commons-io/2.18.0
+		3. webapp -> web-inf -> lib 에 2개 파일을 넣어준다.
+			commons-io-2.18.0 , commons-fileupload-1.5.jar
+		4. 해당 .jar 오른쪽 클릭 -> [build path] -> [add..]
+		
+		* 톰캣10.0 이후 버전에서는 commons.jar 사용하기 위해서는 *마이그레이션* 필요하다.
+			* 마이그레이션 : javax 경로들을 jakarta 로 변경하는 과정 , commons 라이브러리가 사용하는 javax 를 jakarta 변경하기
+			1. https://tomcat.apache.org/
+			2. 사이드바메뉴 -> [ Tomcat Migration Tool for Jakarta EE ] -> [shaded jar ] 다운로드
+			3. webapp -> web-inf -> lib 에 저장 , 'jakartaee-migration-1.0.9-shaded.jar'
+			4. 'jakartaee-migration-1.0.9-shaded.jar' 파일 오른쪽 클릭 -> [show in] -> [terminal]
+			5. 주의할점 : 각 jar의 버전 확인후 아래와 같이 작성한다. 
+				(1) java -jar jakartaee-migration-1.0.9-shaded.jar commons-fileupload-1.5.jar commons-fileupload-1.5.jar
+				(2) java -jar jakartaee-migration-1.0.9-shaded.jar commons-io-2.18.0.jar commons-io-2.18.0.jar
+				- 위 코드를 입력후 엔터 하면 마지막줄에 'successfully' 나오면 성공  
+				
+				
+				
+	
 		
 		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
