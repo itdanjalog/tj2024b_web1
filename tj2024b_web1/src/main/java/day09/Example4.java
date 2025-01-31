@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -57,15 +58,23 @@ public class Example4 extends HttpServlet {
 						System.out.println("첨부파일이 아닌 일단 텍스트 : " + fileItem.getName() );
 					}else { // 첨부파일 폼 자료인지 
 						System.out.println("첨부파일 : " + fileItem.getName() );
+							// * 만일 서로 다른 사람이 동일한 파일명을 올릴경우 식별이 불가능.-->방안 : UUID 내장함수
+								// - UUID는 16진수로 5칸 의 임의 자료 생성한다. 
+							String uuid = UUID.randomUUID().toString();
+							System.out.println( uuid ); // 81601f53-b444-442b-835d-422fc579421b ( 실행마다 다르게 발급 )
+								// - UUID 와 업로드 파일명 연결 , 만약에 파일명에 '-'(하이픈) 포함되면 uuid 와 파일명 구분이 힘들다.
+								// 만약에 사용자가 업로드한 파일명에 -(하이픈)를 _(언더바)로 변경 하기. 이유 : -(하이픈)는 uuid 구분용
+								// "문자열".replaceAll( "변경할문자" , "새로운문자" ); : 문자열내 변경할문자가 존재하면 새로운문자로 치환
+								// 예시] 81601f53-b444-442b-835d-422fc579421b-짱구.jpg
+							String filename = uuid +"-"+ fileItem.getName().replaceAll( "-" , "_" );
 						// 8. 만일 첨부파일이면 현재 업로드 경로에 파일명 붙이기.
-						File uploadFile = new File( uploadPath +"/"+fileItem.getName() );
+						File uploadFile = new File( uploadPath +"/"+ filename  );
 						// 9. 지정한 파일명으로 업로드 처리 
 						fileItem.write(uploadFile);
 					} 
 				} // for end
 			} // if end
 		}catch( Exception e ) { System.out.println(e);}
-		
 	} // f end 
 } // class end 
 
