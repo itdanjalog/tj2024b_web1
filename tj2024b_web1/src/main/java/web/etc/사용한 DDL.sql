@@ -17,6 +17,7 @@ create table member(
     mimg varchar(255) default 'default.jpg',
     constraint primary key( mno )
 ); # table end 
+
 # [1] 회원테이블 샘플 레코드 삽입
 insert into member ( mid , mpwd , mname , mphone ) values( 'qwe123' , 'a123456' , '유재석' ,  '010-3333-3333' );
 insert into member ( mid , mpwd , mname , mphone ) values( 'asd123' , 'b123456' , '강호동' ,  '010-4444-4444' );

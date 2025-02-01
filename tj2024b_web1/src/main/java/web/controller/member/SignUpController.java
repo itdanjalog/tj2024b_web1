@@ -22,102 +22,83 @@ import web.model.dto.MemberDto;
 @WebServlet("/member/signup")
 public class SignUpController extends HttpServlet {
 
-	private static final String UPLOAD_DIRECTORY = "upload";
-
 	
+	// [ 프로필 등록 가능한 회원가입 ] 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(" signup POST OK ");
-
-   		
-		// * commons.jar 이용한 업로드 구현 
-		// commons-io.jar ,  commons-fileupload.jar 빌드 필요!!
-		
-		// 1. 저장경로 [ 첨부파일이 저장될 폴더 위치 ] 
+		System.out.println("signup post ok");
+		// 1. 업로드 경로 가져오기 
 		String uploadPath = req.getServletContext().getRealPath("/upload");
-		
-		// 2. 파일아이템저장소 객체 : 업로드할 옵션  [ import org.apache.commons.fileupload.FileItem; ]
-		DiskFileItemFactory itemFactory = new DiskFileItemFactory();
-		itemFactory.setRepository( new File( uploadPath ) );	//  2.저장위치 [ File타입 ] 
-		itemFactory.setSizeThreshold( 1024 * 1024 * 1024 ); 	//  3.용량
-		itemFactory.setDefaultCharset("UTF-8");					// 4.한글인코딩
-		
-		// 3. 파일 업로드 객체 [ import org.apache.commons.fileupload.servlet.ServletFileUpload; ] 
-		ServletFileUpload fileUpload = new ServletFileUpload( itemFactory );
-		
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
-        
-		// 4. 파일 업로드 요청[ 요청방식 : request ] 
+		// 2. 만일 해당 경로가 없으면 만들어주기.
+		File file = new File( uploadPath );
+		if( file.exists() ) {} 	// 경로가 존재하면 아무것도 안함.
+		else {  file.mkdir(); } // 경로가 존재하지 않으면 경로(폴더) 생성 하기.
+		// 3. 파일 업로드 설정 , DiskFileItemFactory클래스 
+		DiskFileItemFactory factory = new DiskFileItemFactory(); // 업로드 설정 객체 생성 
+		factory.setRepository(file); // 경로 설정 
+		factory.setSizeThreshold( 1024 * 1024 *1024 ); // 용량 제한 설정, 1024 -> 1kb , 1024*1024 -> 1mb , 1024*1024*1024->1gb
+		factory.setDefaultCharset("UTF-8"); // 힌글 인코딩 설정 
+		// 4. 설정된 객체를 서블릿업로드 객체에 대입
+		ServletFileUpload fileUpload = new ServletFileUpload(factory);
+		// 5. HTTP 요청 객체 내 데이터 파싱/가져오기 ,
+		String filename = "default.jpg";
 		try {
-			
-				// form전송시 input/select/textarea 등 태그의 모든 데이터 한번에 요청해서 결과를 List 반환 
 			List< FileItem > fileList = fileUpload.parseRequest( req );
-				// FileItem : 각 요청한 데이터 
-			// 5. 업로드 실행 
-			String filename = null;
-			for( FileItem item : fileList ) { // 요청한 input 들의 데이터를 반복문으로 하나씩 꺼내기.
-				// 1. 일반 필드 [ isFormField() : 만약에 일반폼필드이면 true / 아니고 첨부파일필드이면 false  ] 
-				if( item.isFormField() ) { System.out.println( item.getString() ); } // .getString() : 해당 요청 input의 value 호출 
-				else { // 2. file 필드
-					// 만약에 파일 필드이면 업로드 진행
-						System.out.println( "업로드할 파일명 : " + item.getName() ); // .getName()
-					// 6.업로드 경로 + 파일명 [ 조합 ] 
-						if( !item.getName().trim().isEmpty() ) {
-							// 파일명에 중복이 있을때 식별 생성 
-							UUID uuid = UUID.randomUUID();
-								// UUID 클래스 : 고유성을 보장하는 ID를 만들기 위한 식별자 표준 규약  [ - 하이픈 4개 구역 ]
-							 filename = uuid+"-"+ item.getName().replaceAll("-", "_");
-													// 만약에 파일명에 - 하이픈 존재하면 _언더바로 변경 
-													// 왜?? 파일명과 UUID 간의 식별하기 위해 구분 -하이픈 사용하기 때문에.
-													// 추후에 파일명만 추출시 사용자가 파일명에 - 이 있으면 파일명 추출시 쪼개기가 힘듬.
-							// UUID[ - - -  ] - 파일명 : 추후에 파일명만 추출시 -하이픈 기준으로 쪼개기 
-							
-							File fileUploadPath = new File( uploadPath +"/"+ filename ) ;
-								System.out.println( "업로드경로와 파일명이 조합된 경로 : " + fileUploadPath );
-							item.write( fileUploadPath ); // .write("저장할경로[파일명포함]") 파일 업로드할 경로를 file타입으로 제공 
-						}else {
-							filename = "default.png";
-						}
+			// 6. 파싱된 자료들을 반복문으로 하여 하나씩 조회하여 첨부파일 찾기. 
+			for( FileItem item : fileList ) { // 향상된 for문 , for( 타입 반복변수명 : 리스트변수명 ){ }
+				// 7. 만약에 조회중인 자료가 일반 텍스트 이면 
+				if( item.isFormField() ) {
+				}else { // 아니면 , 조회중인 자료가 첨부파일 이면 
+					if( !item.getName().isEmpty() ) { // 첨부파일이 비어있지 않으면 
+						// 8. UUID 이용한 첨부파일명 조합하기.  예] uuid-파일명  , 주의할점 : 파일명에 -하이픈을 모두 _언더바 로 변경 
+						filename = UUID.randomUUID().toString() +"-"+item.getName().replaceAll("-", "_");
+						// 9. 업로드할 경로 와 파일명 조합하여 경로 만들기
+						File uploadFile = new File( uploadPath +"/"+ filename);
+						// 10. 지정한 경로에 업로드하기
+						item.write( uploadFile );
+					}
 				}
-			}
-			// ------------------------------------- 업로드 끝 --> DB처리 --------------------- //
+			} // for end 
 			
-			System.out.println( fileList.get(0).getString() );
-			MemberDto memberDto = new MemberDto();
-				memberDto.setMid( fileList.get(0).getString() );
-				memberDto.setMpwd( fileList.get(1).getString() );
-				memberDto.setMname( fileList.get(2).getString() );
-				memberDto.setMphone( fileList.get(3).getString() );
-				System.out.println( filename );
-				memberDto.setMimg(filename);
-			
-			// Dto를 Dao처리 
-			boolean result = MemberDao.getInstance().signup(memberDto);
-			System.out.println( result );
-			//
-			resp.setContentType("application/json");
-			resp.getWriter().print(result);
-			
-		}catch (Exception e) { System.out.println(e); }
+		// 11. 첨부파일 아닌 일단 텍스트/값 dto로 직접 파싱 
+		MemberDto memberDto = new MemberDto();
+		memberDto.setMid( fileList.get(0).getString() ); // fileList.get(0).getString() : 첫번째 필드의 텍스트/값  가져오기
+		memberDto.setMpwd( fileList.get(1).getString() ); // 첫번째 필드의 텍스트/값  가져와서  dto 넣기 
+		memberDto.setMname( fileList.get(2).getString() ); // 두번째 필드의 텍스트/값  가져와서 dto 넣기 
+		memberDto.setMphone(fileList.get(3).getString() ); // 세번째 필드의 텍스트/값  가져와서 dto 넣기 
+		memberDto.setMimg(filename); // 업로된 파일명을 dto 넣기 
+		System.out.println( memberDto );
 		
-		
-		/*
-		// 1.[HTTP 요청의 header body 자료(JSON)를 자바(DTO)로 받는다.]
-		ObjectMapper mapper = new ObjectMapper();
-		MemberDto memberDto = mapper.readValue( req.getReader() , MemberDto.class);
-		System.out.println( "memberDto : " + memberDto );
-		// 2.[ 데이터 유효성검사 ]
-		// 3.[ DAO 에게 데이터 전달 하고 응답 받기 ]
+		// 12.
 		boolean result = MemberDao.getInstance().signup(memberDto);
-		// 4.[ 자료(DTO/자바)타입을 JS(JSON)타입으로 변환한다.]
-		// 5.[ HTTP 응답의 header body 로 application/json 으로 응답/반환하기]
+		// 13.
 		resp.setContentType("application/json");
 		resp.getWriter().print(result);
-		*/
-	}
+		
+		}catch (Exception e) { System.out.println("업로드 실패 : " + e ); }
+		
+	} // f end 
+	
+	
+	
+	// [ 프로필 등록이 불가능한 회원가입 ]
+//	@Override
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		System.out.println(" signup POST OK ");
+//		// 1.[HTTP 요청의 header body 자료(JSON)를 자바(DTO)로 받는다.]
+//		ObjectMapper mapper = new ObjectMapper();
+//		MemberDto memberDto = mapper.readValue( req.getReader() , MemberDto.class);
+//		System.out.println( "memberDto : " + memberDto );
+//		// 2.[ 데이터 유효성검사 ]
+//		// 3.[ DAO 에게 데이터 전달 하고 응답 받기 ]
+//		boolean result = MemberDao.getInstance().signup(memberDto);
+//		// 4.[ 자료(DTO/자바)타입을 JS(JSON)타입으로 변환한다.]
+//		// 5.[ HTTP 응답의 header body 로 application/json 으로 응답/반환하기]
+//		resp.setContentType("application/json");
+//		resp.getWriter().print(result);
+//	}
+	
+	
 }
 
 
