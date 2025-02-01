@@ -1,0 +1,11 @@
+.mimgbox{
+	text-align: center;
+}
+.mimg{
+	width: 250px;
+    height: 250px;
+    border-radius: 30px;
+    border: 1px solid #e8e8e8;
+    padding: 2px;
+	object-fit: cover;
+}

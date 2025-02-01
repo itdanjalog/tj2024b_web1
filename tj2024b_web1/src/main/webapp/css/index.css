@@ -10,3 +10,7 @@
 *{ font-family: 'yg-jalnan';  }
 
 .pointbox{ color: red }
+
+.head_profile{
+	width:50px; border-radius:30px; border: 1px solid #e8e8e8; padding: 2px;    height: 50px;
+}

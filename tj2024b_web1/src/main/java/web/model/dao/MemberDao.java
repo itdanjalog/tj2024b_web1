@@ -103,14 +103,15 @@ public class MemberDao extends Dao {
 	public boolean update( MemberDto memberDto ) {
 		try {
 			// [1] SQL 작성한다.
-			String sql = "update member set mpwd = ? , mname = ? , mphone = ? where mno = ? ";
+			String sql = "update member set mpwd = ? , mname = ? , mphone = ? , mimg = ? where mno = ? ";
 			// [2] DB와 연동된 곳(conn)에 SQL 기재한다.
 			PreparedStatement ps = conn.prepareStatement( sql );
 			// [*] 기재된 SQL 에 매개변수 값 대입한다.
 			ps.setString( 1 , memberDto.getMpwd() );
 			ps.setString( 2 , memberDto.getMname() );
 			ps.setString( 3 , memberDto.getMphone() );
-			ps.setInt( 4 , memberDto.getMno() );
+			ps.setString( 4 , memberDto.getMimg() );
+			ps.setInt( 5 , memberDto.getMno() );
 			// [3] 기재된 SQL 실행하고 결과를 받는다.
 			int count = ps.executeUpdate();
 			// [4] 결과에 따른 처리 및 반환를 한다.

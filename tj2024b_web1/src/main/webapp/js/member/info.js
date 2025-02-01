@@ -10,6 +10,7 @@ const getMyInfo = ( ) => {
             document.querySelector('.midInput').value = data.mid;
             document.querySelector('.mnameInput').value = data.mname;
             document.querySelector('.mphoneInput').value = data.mphone;
+			document.querySelector('.mimg').src = `/upload/${data.mimg}`;
         }
     }).catch( e => { console.log(e)})
 } // f end 

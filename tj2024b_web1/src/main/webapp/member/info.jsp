@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+   	<link href="/css/member/info.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -17,6 +18,11 @@
                     <div class="form-floating mb-3">
                         <h5> 내정보 </h5>
                     </div>
+                    
+                    <div class="form-floating mb-3 mimgbox">
+                        <img src="" class="mimg" />
+                    </div>
+                    
                     <div class="form-floating mb-3">
                         <input type="text" readonly value="" class="form-control midInput" id="floatingInput" placeholder="ID">
                         <label for="floatingInput">계정아이디</label>

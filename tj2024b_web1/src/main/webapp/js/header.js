@@ -29,7 +29,7 @@ const getLoginMid = ( ) =>{
                 //3. 로그아웃 버튼 , 마이페이지 버튼 , 로그인된 아이디 활성화 
                 html +=`<li class="nav-item dropdown">
 						    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						        <img style="width:50px; border-radius:30px;border: 1px solid;padding: 2px;" src="/upload/${ data.mimg }"/> ${ data.mid }님</a>
+						        <img class="head_profile" src="/upload/${ data.mimg }"/> ${ data.mid }님</a>
 						    </a>
 						    <ul class="dropdown-menu">
 						        <li class="nav-item">  <a class="nav-link" href="#" onclick="logOut()"> 로그아웃 </a> </li>
