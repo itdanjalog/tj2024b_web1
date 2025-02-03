@@ -18,7 +18,7 @@ const getLoginInfo = ( ) => {
 			else{ console.log('로그인상태');
 				// (3) 각 상태에 따라 로그인 메뉴 구성
 				html += `<li class="nav-item"> 
-							<a class="nav-link" href="#"> <img class="header_profile" src="" /> ${ data.mid } 님  </a> 
+							<a class="nav-link" href="#"> <img class="header_profile" src="/tj2024b_web1/upload/${ data.mimg }" /> ${ data.mid } 님  </a> 
 						</li>
 						<li class="nav-item"> <a class="nav-link" href="#" onclick="onLogOut()">로그아웃</a> </li>`
 			}
