@@ -80,6 +80,7 @@ public class MemberDao extends Dao {
 				memberDto.setMname( rs.getString("mname" ) );
 				memberDto.setMphone( rs.getString("mphone") );
 				memberDto.setMdate( rs.getString("mdate") );
+				memberDto.setMimg( rs.getString("mimg"));
 				return memberDto; // 조회된 회원정보를 반환한다.
 			}
 		}catch(SQLException e ) { System.out.println(e);}
