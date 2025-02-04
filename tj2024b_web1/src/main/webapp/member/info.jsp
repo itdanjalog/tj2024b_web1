@@ -36,6 +36,20 @@
 	      </form>
 	    </div>
 	  </div>
+	  <div class="row align-items-center g-lg-5 py-5">
+	  		    <div class="col-md-10 mx-auto col-lg-5">
+	    	<table class="table">
+	    		<thead>
+	    			<tr>
+	    				<th> # </th> <th> 내역 </th> <th> 수량 </th> <th> 변경일 </th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			
+	    		</tbody>
+	    	</table>
+	    </div>
+	  </div>
 	</div>
   	<script src="/tj2024b_web1/js/member/info.js"></script>
 </body>

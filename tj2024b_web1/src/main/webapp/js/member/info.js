@@ -46,6 +46,35 @@ const onUpdate = ( ) => {
 	// 현재 페이지와 이동할 페이지가 같은 폴더이면 지정 파일명 작성 , 만일 다른 폴더이면 프로젝트명 부터 작성  , ../ 상대참조 작성 
 } // f end 
 
+// [4] 내 포인트 내역 조회 요청 
+const getPointLog = ( ) => {
+	// fetch 옵션 
+	const option = { method : 'GET' }
+	// fetch 실행 
+	fetch( '/tj2024b_web1/point' , option )
+		.then( r => r.json() )
+		.then( data => { 
+			if( data != null ){ // 로그인 상태이면 
+				const tbody = document.querySelector('tbody');
+				
+				let html = ``;
+				
+				data.forEach(  (point) =>{
+					html += `<tr>
+								<th> ${ point.pono} </th> 
+								<th> ${ point.pocomment } </th>
+								<th> ${ point.pocount } </th> 
+								<th> ${ point.podate } </th>
+							</tr>`
+				})
+				
+				tbody.innerHTML = html;
+			}
+		})
+		.catch( e => { console.log(e) } )
+} // f end 
+getPointLog();
+
 
 
 

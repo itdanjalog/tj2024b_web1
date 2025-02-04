@@ -17,6 +17,8 @@ public class MemberDto {
 	private String mphone;	// 연락처 
 	private String mdate;	// 가입일 
 	private String mimg;	// 프로필
+	private int mpoint;	// DB member 테이블에는 존재하지 않지만. 자바 내부적으로 사용할 예정 
+	
 
 	// @NoArgsConstructor
 	// public MemberDto()

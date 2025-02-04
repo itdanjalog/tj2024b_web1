@@ -31,6 +31,9 @@ public class InfoController extends HttpServlet {
 			int loginMno = (Integer)object; 
 			// (3) 현재 로그인된 회원번호를 매개변수로 전달한다.
 			result = MemberDao.getInstance().myInfo(loginMno);
+			// * 내 포인트 조회
+			int mpoint = MemberDao.getInstance().getPoint(loginMno);
+			result.setMpoint( mpoint );
 		}
 		// 4.[ 자료(DTO/자바)타입을 JS(JSON)타입으로 변환한다.]
 		ObjectMapper mapper = new ObjectMapper();

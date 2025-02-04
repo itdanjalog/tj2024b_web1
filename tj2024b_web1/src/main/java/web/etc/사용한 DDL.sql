@@ -5,7 +5,6 @@ create database jspweb;
 use jspweb;                                                  
 # 2. 테이블 생성  , PK 테이블 먼저 생성 한다. 적절하게 타입 과 제약조건을 고려한다.
 
-
 # [1] 회원테이블 생성 
 create table member(
     mno int unsigned auto_increment , 
@@ -16,11 +15,34 @@ create table member(
     mdate datetime default now() , 
     mimg varchar(255) default 'default.jpg',
     constraint primary key( mno )
-); # table end 
-# [1] 회원테이블 샘플 레코드 삽입
+); # table end
+
+# [*] 회원테이블 샘플 레코드 삽입
 insert into member ( mid , mpwd , mname , mphone ) values( 'qwe123' , 'a123456' , '유재석' ,  '010-3333-3333' );
 insert into member ( mid , mpwd , mname , mphone ) values( 'asd123' , 'b123456' , '강호동' ,  '010-4444-4444' );
 insert into member ( mid , mpwd , mname , mphone ) values( 'zxc123' , 'c123456' , '신동엽' ,  '010-5555-5555' );
 insert into member ( mid , mpwd , mname , mphone ) values( 'vbn123' , 'd123456' , '서장훈' ,  '010-6666-6666' );
 insert into member ( mid , mpwd , mname , mphone ) values( 'rty123' , 'e123456' , '하하'   ,  '010-7777-7777' );
 select * from member;
+
+# [2] 포인트 테이블 생성 
+create table pointlog(
+        pono int unsigned auto_increment , 
+    pocomment varchar(255) not null , 
+    pocount int ,
+    podate datetime default now() ,
+    mno int unsigned , 
+    constraint primary key( pono ),
+    constraint foreign key( mno ) references member( mno ) on update cascade on delete cascade 
+);
+
+# [*] 회원테이블 샘플 레코드 삽입
+insert into pointlog ( pocomment , pocount , mno ) values( '회원가입축하' , 100 , 1  );
+insert into pointlog ( pocomment , pocount , mno ) values( '로그인' , 1 , 1  );
+insert into pointlog ( pocomment , pocount , mno ) values( '아이템구매' , -50 , 1  );
+insert into pointlog ( pocomment , pocount , mno ) values( '포인트구매' , 2000 , 1  );
+insert into pointlog ( pocomment , pocount , mno ) values( '아이템구매' , 1000 , 1  );
+
+select * from pointlog;
+
+
