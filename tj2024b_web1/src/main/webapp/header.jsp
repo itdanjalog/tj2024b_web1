@@ -31,6 +31,7 @@
 				<!--  메뉴 항목 -->
 			  <li class="nav-item"> <a class="nav-link" href="#">게시판</a> </li>
 			  
+			  <!-- 드롭다운  -->
 			  <li class="nav-item dropdown">
 			    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 			      제품
@@ -42,6 +43,7 @@
 			      <li><a class="dropdown-item" href="#">Something else here</a></li>
 			    </ul>
 			  </li>
+			  
 			</ul>
 			
 			<!-- 오른쪽 메뉴 목록 -->
