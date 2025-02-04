@@ -20,6 +20,7 @@ const getLoginInfo = ( ) => {
 				html += `<li class="nav-item"> 
 							<a class="nav-link" href="#"> <img class="header_profile" src="/tj2024b_web1/upload/${ data.mimg }" /> ${ data.mid } 님  </a> 
 						</li>
+						<li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/member/info.jsp">마이페이지</a> </li>
 						<li class="nav-item"> <a class="nav-link" href="#" onclick="onLogOut()">로그아웃</a> </li>`
 			}
 			// (4) 구성한 메뉴들을 innerHTML 한다.
