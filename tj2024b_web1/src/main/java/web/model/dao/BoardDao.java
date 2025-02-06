@@ -33,7 +33,7 @@ public class BoardDao extends Dao {
 	}
 	
 	// [2] 게시물 전체 조회 findAll SQL 메소드 
-	public ArrayList< BoardDto > findAll(){
+	public ArrayList< BoardDto > findAll( int cno , int startRow , int display ){
 		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
 		try {
 			// (1) 게시물 테이블 의 모든 속성을 전체 조회 
@@ -41,9 +41,17 @@ public class BoardDao extends Dao {
 			// (2) 게시물 테이블 의 모든 속성과 회원 테이블의 mid 속성도 조회 , inner join : 다른 테이블과 같이 조회할때 , 조인 조건 주로 : pk-fk
 			// 조인 : select * from 테이블A inner join 테이블B on 테이블A.PK필드명 = 테이블B.FK필드명;
 			// 정렬 : order by 필드명 desc=내림차순 , asc=오름차순  
-			String sql = " select * from board b inner join member m on b.mno = m.mno order by b.bno desc";
+			// String sql = " select * from board b inner join member m on b.mno = m.mno order by b.bno desc";
+			String sql ="select * from board b inner join member m on b.mno = m.mno "
+					+ " where cno = ? order by b.bno desc limit ? , ? "; // [1] SQL 작성한다.
+			
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(  1 , cno); // [*] 기재된 SQL 에 매개변수 값 대입한다.
+			ps.setInt(  2 , startRow );
+			ps.setInt(  3 , display );
+			
 			ResultSet rs = ps.executeQuery();
+
 			while( rs.next() ) {
 				BoardDto boardDto = new BoardDto();
 				boardDto.setBno( rs.getInt("bno") );

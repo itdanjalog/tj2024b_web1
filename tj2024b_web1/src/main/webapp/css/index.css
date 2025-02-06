@@ -11,7 +11,7 @@
 *{ font-family: 'yg-jalnan'; }
 /* header member profile */
 .header_profile{
-	width: 70px; height: 70px; /* 가로사이즈 세로사이즈 = 고정 크기일때 사이즈 비율 깨짐. */
+	width: 45px; height: 45px; /* 가로사이즈 세로사이즈 = 고정 크기일때 사이즈 비율 깨짐. */
 	border-radius: 40px; /* 둥근모서리 */
 	padding: 2px ; /* 안쪽 여백 */
 	border : 1px solid #e8e8e8; /* 테두리 */
@@ -20,19 +20,3 @@
     /* object-fit: none;  사이즈 고정 */
     object-fit: cover; /* 비율 유지 , 사이즈 잘림 */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

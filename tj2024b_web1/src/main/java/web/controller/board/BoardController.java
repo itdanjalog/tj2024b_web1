@@ -50,7 +50,17 @@ public class BoardController extends HttpServlet {
 		System.out.println(" board get ok ");
 		// [1] 요청 매개변수 X
 		// [2] DAO에게 전체 게시물 요청 하고 결과 받기 
-		ArrayList<BoardDto> result = BoardDao.getInstance().findAll( ); 
+		int cno = Integer.parseInt( req.getParameter("cno") ) ;
+		int page = Integer.parseInt( req.getParameter("page") ) ;
+		
+        if( page < 1 ){ page = 1 ; }
+        
+        int display = 10 ; // - 하나의 페이지당 3개씩 표시
+        // 2. 페이지당 게시물을 출력할 시작레코드 번호
+        int startRow = ( page - 1) *  display ;
+		
+		Object result = BoardDao.getInstance().findAll( cno , startRow , display );
+		
 		// [3] 받은 전체 게시물을 JSON 형식의 문자열로 변환하기 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonResult = mapper.writeValueAsString(result);
