@@ -44,13 +44,14 @@ public class BoardController extends HttpServlet {
 		resp.getWriter().print( result );
 	} // f end 
 	
-	// [2] 게시물 전체 조회 컨트롤러 
+	// [2] 게시물 전체 조회 컨트롤러 ( 02/07 +추가 : 카테고리별 )
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(" board get ok ");
-		// [1] 요청 매개변수 X
-		// [2] DAO에게 전체 게시물 요청 하고 결과 받기 
-		ArrayList<BoardDto> result = BoardDao.getInstance().findAll( ); 
+		// [1] 요청 매개변수  , cno 카테고리 번호 가져오기.
+		int cno = Integer.parseInt( req.getParameter("cno") ) ;
+		// [2] DAO에게 전체 게시물 요청 하고 결과 받기 , cno 카테고리 번호 dao 에게 전달
+		ArrayList<BoardDto> result = BoardDao.getInstance().findAll( cno ); 
 		// [3] 받은 전체 게시물을 JSON 형식의 문자열로 변환하기 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonResult = mapper.writeValueAsString(result);
