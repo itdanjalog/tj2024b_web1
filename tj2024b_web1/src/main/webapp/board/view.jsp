@@ -18,8 +18,16 @@
 		
 		</div>
 		
-		<div class="bcontentbox">
+		<div class="bcontentbox" style="min-height: 500px;">
 		
+		</div>
+		
+		<div>
+			<textarea class="form-control rcontent"></textarea>
+			<button onclick="onRplyWrite()" type="button" class="btn btn-primary"> 댓글게시 </button>
+		</div>
+		<div class="replybox">
+			
 		</div>
 		
 	</div>

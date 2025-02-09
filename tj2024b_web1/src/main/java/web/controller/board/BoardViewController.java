@@ -9,8 +9,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import web.model.dao.BoardDao;
 import web.model.dto.BoardDto;
+import web.model.dto.ReplyDto;
 
 @WebServlet("/board/view")
 public class BoardViewController extends HttpServlet {
@@ -30,6 +32,7 @@ public class BoardViewController extends HttpServlet {
 		resp.getWriter().print( jsonResult );
 	} // f end 
 	
+
 }  // c end 
 
 

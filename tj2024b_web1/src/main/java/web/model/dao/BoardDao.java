@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import web.model.dto.BoardDto;
+import web.model.dto.ReplyDto;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE) // private 디폴트 생성자 가 자동 생성 
 public class BoardDao extends Dao {
@@ -30,6 +31,18 @@ public class BoardDao extends Dao {
 			System.out.println(e );
 		}
 		return false;
+	}
+	
+	// 2-2 게시물/레코드 수 구하기 
+	public int gettotalsize(  int cno ) {
+		String sql = "";
+
+			sql = " select count(*) from member m natural join board b where b.cno = "+cno;
+
+		try {
+			PreparedStatement ps =conn.prepareStatement(sql); ResultSet rs = ps.executeQuery();
+			if( rs.next() )return rs.getInt(1);
+		}catch (Exception e) {System.err.println(e);} return 0;
 	}
 	
 	// [2] 게시물 전체 조회 findAll SQL 메소드 
@@ -62,6 +75,8 @@ public class BoardDao extends Dao {
 				boardDto.setMno( rs.getInt("mno"));
 				boardDto.setCno( rs.getInt("cno"));
 				boardDto.setMid( rs.getString("mid") ); // 회원테이블과 조인 한 결과 회원아이디 도 조회 가능하다.
+				boardDto.setMimg( rs.getString("mimg"));
+				
 				list.add(boardDto);
 			}
 		}catch (Exception e) {System.out.println(e);}
@@ -120,12 +135,63 @@ public class BoardDao extends Dao {
 				boardDto.setCno( rs.getInt("cno"));
 				boardDto.setMid( rs.getString("mid") ); // 회원테이블과 조인 한 결과 회원아이디 도 조회 가능하다.
 				boardDto.setCname( rs.getString( "cname") ); // 카테고리테이블 과 조인 한 결과 카테고리명 도 조회 가능하다.
+				boardDto.setMimg( rs.getString("mimg"));
+				
 				return boardDto;
 			}
 		}catch (Exception e) { System.out.println(e);}
 		return null;
 	}
+	
+	// [2] 게시물 전체 조회 findAll SQL 메소드 
+	public ArrayList< ReplyDto > findReply( int bno ){
+		ArrayList< ReplyDto > list = new ArrayList< ReplyDto >();
+		try {
+
+			String sql = "select * from reply r inner join member m on r.mno = m.mno where r.bno = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(  1 , bno ); 
+			
+			ResultSet rs = ps.executeQuery();
+
+			while( rs.next() ) {
+				ReplyDto boardDto = new ReplyDto();
+				boardDto.setRno( rs.getInt("rno"));
+				boardDto.setRcontent( rs.getString("rcontent") );
+				boardDto.setRdate( rs.getString("rdate"));
+				boardDto.setMno( rs.getInt( "mno"));
+				boardDto.setMid( rs.getString("mid") );
+				boardDto.setBno( rs.getInt("bno"));
+				boardDto.setMimg( rs.getString("mimg"));
+				
+				list.add(boardDto);
+			}
+		}catch (Exception e) {System.out.println(e);}
+		return list; 
+	} // f end 
+	
+	// [1] 글쓰기 write SQL 메소드 
+	public boolean ReplyWrite( ReplyDto boardDto ) {
+		try {
+			String sql = "insert into reply( rcontent ,  mno , bno )values(?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString( 1 , boardDto.getRcontent() );
+			ps.setInt( 2 , boardDto.getMno() );
+			ps.setInt( 3 , boardDto.getBno() );
+			int count = ps.executeUpdate();
+			if( count == 1 ) return true;
+		}catch( Exception e ) {
+			System.out.println(e );
+		}
+		return false;
+	}
+	
+	
+	
 } // class end 
+
+
 
 
 

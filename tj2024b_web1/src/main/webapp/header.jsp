@@ -28,12 +28,15 @@
 	    
 	    	<!-- 왼쪽 메뉴 목록  -->
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<!--  메뉴 항목 -->
-			  <li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=1">뉴스</a> </li>
-			  <li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=2">이벤트</a> </li>
-			  <li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=3">FAQ</a> </li>
-			  <li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=4">튜토리얼</a> </li>
-			  <li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=5">사용자 리뷰</a> </li>
+			
+				<!--  게시판 카테고리별 메뉴 항목 -->
+				<li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=1">뉴스</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=2">이벤트</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=3">FAQ</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=4">튜토리얼</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="/tj2024b_web1/board/board.jsp?cno=5">사용자리뷰</a> </li>
+  
+			  
 			  
 			  <!-- 드롭다운  -->
 			  <li class="nav-item dropdown">
@@ -67,6 +70,7 @@
 	
 </body>
 </html>
+
 
 
 
