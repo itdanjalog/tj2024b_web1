@@ -26,6 +26,13 @@
 		
 			</tbody>
 		</table>
+		
+		<!-- 부트스트랩 : 페이지네이션 -->
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination pagebtnbox"> <!--  pagebtnbox  -->
+				
+		  </ul>
+		</nav>
 	</div>
 	<script src="/tj2024b_web1/js/board/board.js" type="text/javascript"></script>
 

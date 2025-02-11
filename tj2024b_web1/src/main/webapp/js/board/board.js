@@ -18,10 +18,12 @@ const findall = ( ) => {
 	const option = { method : 'GET' }
 	fetch( `/tj2024b_web1/board?cno=${ cno }&page=${ page }` , option )
 		.then( r => r.json() )
-		.then( data => { console.log( data );
+		.then( response => { console.log( response );
 			const boardlist = document.querySelector('.boardlist > tbody')
 			let html = ``;
-			data.forEach( (board)=>{
+			
+			let boardList = response.data;
+			boardList.forEach( (board)=>{
 				html += `<tr>
 							<td> ${ board.bno } </td>
 							<td> <a href="view.jsp?bno=${ board.bno }"> ${ board.btitle } </a> </td>
@@ -31,10 +33,40 @@ const findall = ( ) => {
 						</tr>`
 			}) 
 			boardlist.innerHTML = html;
+			getPageBtn( response , cno ); // 페이징 버튼 생성 함수 실행 , 현재 페이지번호 전달 
 		 })
 		 .catch( e => { console.log(e); } )
 } // f end 
 findall(); 
+
+// [3] 페이지 버튼 생성 함수 , 실행조건 : 게시물 출력후 
+const getPageBtn = ( response , cno ) => {
+	page = parseInt( response.page ); //  parseInt() 정수로 타입 변환 함수.
+	const pagebtnbox = document.querySelector('.pagebtnbox'); // 1. 어디에 
+	let html = ``; // 2. 무엇을
+		// (1) 이전 버튼 , 만약에 현재페이지가 1 이하 1 로 고정 , 아니면 -1
+	html +=`<li class="page-item">
+				<a class="page-link" href="board.jsp?cno=${ cno }&page=${ page <= 1 ? 1 : page-1 }">이전</a>
+			</li>` 
+	// * 1부터 10까지 버튼 만들기. // 최대페이지 , 현재페이지의 시작버튼 번호 , 현재페이지의 끝버튼 번호 
+	// * startbtn 부터 endbtn 까지 버튼 만들기 
+	// for( let index = 1 ; index <=10 ; index++ ){ 
+	for( let index = response.startbtn ; index <= response.endbtn ; index++ ){
+		// 만약에 현재페이지가 index와 같다면 부트스트랩의 .active 클래스 부여하기.
+		html += `<li class="page-item">
+					<a class="page-link ${ page == index ? 'active' : '' }" href="board.jsp?cno=1&page=${ index }">
+						${ index }
+					</a>
+				</li>`
+	}// for end 
+		// (3) 다음 버튼 , 만약에 현재페이지가 마지막페이지( 전체페이지수 ) 이면 마지막페이지 고정 
+	html +=`<li class="page-item">
+				<a class="page-link" href="board.jsp?cno=${ cno }&page=${ page >= response.totalpage ? page : page+1  }">다음</a>
+			</li>` 
+	pagebtnbox.innerHTML = html; // 3. 출력 
+} // f end 
+
+
 
 
 /*
