@@ -9,12 +9,9 @@
 <body>
 
 	<jsp:include page="/header.jsp"></jsp:include>
-	
 	<div class="container"> <!-- container 부트스트랩 클래스  -->
-		
 		<a href="write.jsp"> 글작성 </a>
 		<button onclick="location.href='write.jsp' " > 글작성 </button>
-		
 		<table class="table boardlist"> <!--  table 부트스트랩 클래스 -->
 			<thead>
 				<tr>
@@ -30,7 +27,6 @@
 			</tbody>
 		</table>
 	</div>
-
 	<script src="/tj2024b_web1/js/board/board.js" type="text/javascript"></script>
 
 </body>

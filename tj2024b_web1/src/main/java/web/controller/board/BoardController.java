@@ -44,14 +44,25 @@ public class BoardController extends HttpServlet {
 		resp.getWriter().print( result );
 	} // f end 
 	
-	// [2] 게시물 전체 조회 컨트롤러 ( 02/07 +추가 : 카테고리별 )
+	// [2] 게시물 전체 조회 컨트롤러 ( 02/07 +추가 : 카테고리별 , 2/11 +추가 : 페이징 )
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(" board get ok ");
-		// [1] 요청 매개변수  , cno 카테고리 번호 가져오기.
+		// [1] 요청 매개변수  , cno 카테고리 번호 가져오기. page 번호 가져오기 
 		int cno = Integer.parseInt( req.getParameter("cno") ) ;
+		int page = Integer.parseInt( req.getParameter("page") );
+		
+			// * 페이징 처리 에 필요한 자료를 준비 
+			// 1. 1페이지당 출력할 게시물 수
+			int display = 5; // 페이지 1개당 게시물 5개 출력할 예정 
+			// 2. 페이지당 조회할 게시물의 시작 번호  , (현재페이지-1)*페이지당게시물수
+			int startRow = (page-1) * display;
+				// 게시물이 10개 존재 한다고 가정 : 0번 1번 2번 3번 4번 5번 6번 7번 8번 9번 
+				// 1페이지에 시작번호 : 0번 , 2페이지 시작번호 : 4번
+		
 		// [2] DAO에게 전체 게시물 요청 하고 결과 받기 , cno 카테고리 번호 dao 에게 전달
-		ArrayList<BoardDto> result = BoardDao.getInstance().findAll( cno ); 
+		ArrayList<BoardDto> result = BoardDao.getInstance().findAll( cno , startRow , display  ); 
+		
 		// [3] 받은 전체 게시물을 JSON 형식의 문자열로 변환하기 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonResult = mapper.writeValueAsString(result);
