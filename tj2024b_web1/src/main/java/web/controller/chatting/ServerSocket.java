@@ -1,5 +1,6 @@
 package web.controller.chatting;
 
+import jakarta.websocket.OnMessage;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
@@ -8,7 +9,7 @@ import jakarta.websocket.server.ServerEndpoint;
 // - @WebServlet HTTP vs -@ServerEndpoint WS
 @ServerEndpoint("/chatsocket")
 public class ServerSocket {
-	
+	// [1] 클라이언트 소켓이 서버소켓에 접속을 했을때 , onOpen
 	@OnOpen
 	public void onOpen( Session session ) {
 	// Session : [import] jakarta.websocket.Session 
@@ -16,4 +17,29 @@ public class ServerSocket {
 		System.out.println( session );
 	} // f end 
 	
+	// [2] 클라이언스 소켓이 서버소켓으로 부터 메시지를 보냈을때 , onMessage
+	@OnMessage
+	public void opMessage( Session session , String message ) {
+		System.out.println("클라이언트소켓으로 부터 메시지 왔다.");
+		System.out.println( message );
+		
+		// * 서버가 클라이언트 에게 메시지 전송 
+		try {
+			session.getBasicRemote().sendText("클라이언트 소켓 안녕!");
+		}catch (Exception e) { System.out.println( e ); }
+		
+	}
 } // c end 
+
+
+
+
+
+
+
+
+
+
+
+
+

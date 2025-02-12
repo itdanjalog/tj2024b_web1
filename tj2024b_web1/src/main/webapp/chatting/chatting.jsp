@@ -12,7 +12,9 @@
 	<div>
 		<div> </div>
 		<textarea ></textarea>
-		<button type="button"> 전송 </button>
+		<button 
+			onclick="onMsgSend()" 
+			type="button"> 전송 </button>
 	</div>
 	
 	<script src="/tj2024b_web1/js/chatting/chatting.js"></script>
