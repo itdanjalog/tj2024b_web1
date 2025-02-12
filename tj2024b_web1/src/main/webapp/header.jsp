@@ -61,7 +61,11 @@
 	    </div>
 	  </div>
 	</nav>
-
+	
+	<div class="alarmbox" style=" position: fixed; bottom: 10px; left: 10px; ">
+		
+	</div>
+	
 	<!-- 부트스트랩 JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
 	<!-- header JS -->
